@@ -1,0 +1,62 @@
+<!-- Vasileios Apostolidis-Afentoulis -->
+
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Μετατροπή Δεκαβάθμιας σε Εικοσαβάθμια Κλίμακα</title>
+    <style>
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        label, input, button, p {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+        button {
+            background-color: green;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: darkgreen;
+        }
+    </style>
+</head>
+<body>
+    <h1>Μετατροπή Δεκαβάθμιας σε Εικοσαβάθμια Κλίμακα</h1>
+    <label for="decimal-input">Εισάγετε αριθμό (5-10) και χρησιμοποιήστε το σύμβολο της τελείας ( . ) για τον διαχωρισμό δεκαδικών ψηφίων:</label>
+    <input type="text" id="decimal-input" placeholder="π.χ. 5.5">
+    <br>
+    <button onclick="convert()">Μετατροπή</button>
+    <p id="result"></p>
+    <script>
+        function convert() {
+            const input = document.getElementById('decimal-input').value;
+            const resultElement = document.getElementById('result');
+            try {
+                const decimalValue = parseFloat(input);
+                if (isNaN(decimalValue)) {
+                    throw new Error("Παρακαλώ εισάγετε έγκυρο αριθμό και σιγουρευτείτε ότι χρησιμοποιείτε τελεία και όχι κόμμα.");
+                }
+                if (decimalValue < 5 || decimalValue > 10) {
+                    throw new Error("Ο αριθμός πρέπει να είναι μεταξύ 5 και 10.");
+                }
+
+                const scaledValue = decimalValue * 2;
+                const integerPart = Math.floor(scaledValue);
+                const fractionalPart = Math.round((scaledValue - integerPart) * 100);
+
+                resultElement.textContent = `Ακέραιο Μέρος: ${integerPart}\n\nΑριθμητής: ${fractionalPart}\n\nΠαρανομαστής: 100`;
+            } catch (error) {
+                alert(error.message);
+            }
+        }
+    </script>
+</body>
+</html>
